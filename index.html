@@ -1,0 +1,21 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VK API</title>
+    <script type="text/javascript" src='node_modules/jquery/dist/jquery.min.js'></script>
+</head>
+<body>
+
+    <script>
+        $.ajax({
+            url: 'https://api.vk.com/method/friends.search?user_id=31656437&count=100&fields=photo_200_orig,online&access_token=c48eab24ed5f7af405605a33cbaaa83d9066ec9df07b4f36aec29e807e6991623678ba25008fbebe7251c&v=5.52',
+            method: 'GET',
+            dataType: 'JSONP',
+            success: function(data) {
+                console.log(data);
+            }
+        })
+    </script>
+
+</body>
+</html>
