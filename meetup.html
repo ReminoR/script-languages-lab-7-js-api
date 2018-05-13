@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Meetups near San Francisco</title>
+	<script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon.ico">
+	<link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+<!-- https://www.eventbriteapi.com/v3/users/me/owned_events/?token=TD4KJTXK4VUCSJNXQ3X2 -->
+<script>
+	
+	$.ajax({
+		url: 'https://api.meetup.com/find/upcoming_events?key=10467d721e56765f56726e64326a5331&sign=true&photo-host=public&start_date_range=2018-09-01T00:00:00&end_date_range=2018-12-31T00:00:00&text=python&radius=25&lon=-122.42&lat=37.78',
+		method: 'GET',
+		dataType: 'JSONP',
+		success: function(array) {
+			data = array.data.events;
+			for (i = 0; i < data.length; i++) {
+				console.log(data[i]);
+				$('.wrap').append('<div class="meetups meetup_'+ i + '"></div>');
+				$('.meetup_'+ i).append(
+					'<h2 class="title">' + data[i].name + '</h2>' +
+					'<div class="date_time"><strong>Date: </strong>' + data[i].local_date + '<br><strong>Time: </strong>' + data[i].local_time + '</div>' + 
+					'<div class="place"><strong>Place: </strong> ' + (data[i].venue == undefined ? "Venue is not defined" : data[i].venue.city + ', ' + data[i].venue.address_1) + '</div>' +  
+					'<div class="desc"><strong>Description: </strong>' + data[i].description + '</div>' +
+					'<div class="line"></div>'
+
+				);
+			}
+		}
+	});
+	
+</script>
+<div class="wrap">
+	<h1>Meetups near San Francisco</h1>
+</div>
+
+</body>
+</html>
